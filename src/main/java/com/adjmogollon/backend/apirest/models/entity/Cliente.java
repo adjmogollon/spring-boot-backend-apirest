@@ -48,6 +48,8 @@ public class Cliente implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    private String foto;
+
     //@PrePersist
     public void prePersist() {
         createAt = new Date();
