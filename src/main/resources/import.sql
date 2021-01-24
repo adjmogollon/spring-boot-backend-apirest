@@ -1,4 +1,17 @@
 INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Anibal', 'Mogollon', 'adjmogollon@gmail.com', '2020-12-25');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Apolo', 'Olimpico', 'apolo.olimpico@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Britomartis', 'Olimpico', 'britomartis.olimpico@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Rea', 'Olimpico', 'rea.olimpico@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Zeus', 'Olimpico', 'zeus.olimpico@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Hera', 'Olimpico', 'hera.olimpico@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Demeter', 'Olimpico', 'demeter.olimpico@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Calipso', 'Olimpico', 'calipso.olimpico@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Meg', 'McCaffrey', 'meg.mccaffrey@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Leonidas', 'Valdez', 'leonidas.valdez@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Neron', 'Emperador', 'neron.emperador@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Percy', 'Jackson', 'persyjackson.mccaffrey@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Comodo', 'Emperador', 'comodo.emperador@gmail.com', '2021-01-23');
+INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Apolo', 'Olimpico', 'apolo.olimpico@gmail.com', '2021-01-23');
 INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Lyra', 'Belacqua', 'lyrabelacqua@gmail.com', '2020-12-25');
 INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Marisa', 'Coulter', 'marisacoulter@gmail.com', '2020-12-25');
 INSERT INTO clientes (nombre, apellido, email, create_at) VALUES('Iorek', 'Byrnison', 'IorekByrnison@gmail.com', '2020-12-25');
