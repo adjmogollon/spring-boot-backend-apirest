@@ -1,5 +1,6 @@
 package com.adjmogollon.backend.apirest.controlles;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -144,6 +145,17 @@ public class ClienteRestController {
         Map<String, Object> response = new HashMap<>();
         try {
 
+            Cliente cliente = clienteService.findById(id);
+            String nombreFotoAnterior = cliente.getFoto();
+
+            if (nombreFotoAnterior != null && nombreFotoAnterior.length() > 0) {
+                Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
+                File archivoFotoAnterior = rutaFotoAnterior.toFile();
+                if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
+                    archivoFotoAnterior.delete();
+                }
+            }
+
             this.clienteService.delete(id);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al eliminar cliente en la base de datos");
@@ -164,7 +176,7 @@ public class ClienteRestController {
         Cliente cliente = clienteService.findById(id);
 
         if (!archivo.isEmpty()) {
-            String nombreArchivo = UUID.randomUUID() + "_" + archivo.getOriginalFilename().replace(" ","");
+            String nombreArchivo = UUID.randomUUID() + "_" + archivo.getOriginalFilename().replace(" ", "");
             Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
 
             try {
@@ -175,7 +187,20 @@ public class ClienteRestController {
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
+            String nombreFotoAnterior = cliente.getFoto();
+
+            if (nombreFotoAnterior != null && nombreFotoAnterior.length() > 0) {
+                Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
+                File archivoFotoAnterior = rutaFotoAnterior.toFile();
+                if (archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
+                    archivoFotoAnterior.delete();
+                }
+            }
+
             cliente.setFoto(nombreArchivo);
+            
+            clienteService.save(cliente);
+
             response.put("cliente", cliente);
             response.put("mensaje", "Has subido correctamente la imagen " + nombreArchivo);
 
