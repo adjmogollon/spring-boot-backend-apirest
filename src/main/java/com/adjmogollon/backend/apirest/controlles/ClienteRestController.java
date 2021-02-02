@@ -59,7 +59,7 @@ public class ClienteRestController {
 
     @GetMapping("/clientes/page/{page}")
     public Page<Cliente> index(@PathVariable Integer page) {
-        Pageable pageable = PageRequest.of(page, 4);
+        Pageable pageable = PageRequest.of(page, 14);
         return clienteService.findAll(pageable);
     }
 
@@ -232,8 +232,16 @@ public class ClienteRestController {
             e.printStackTrace();
         }
 
-        if(!recurso.exists() && !recurso.isReadable()){
-            throw new RuntimeException("Error no se pudo cargar la imagen: " + nombreFoto);
+        if (!recurso.exists() && !recurso.isReadable()) {
+            rutaArchivo = Paths.get("/src/main/resources/static/images").resolve("no-usuario.png");
+            try {
+                recurso = new UrlResource(rutaArchivo.toUri());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
+            log.error("Error no se pudo cargar la imagen: " + nombreFoto);
+
         }
 
         HttpHeaders cabecera = new HttpHeaders();
