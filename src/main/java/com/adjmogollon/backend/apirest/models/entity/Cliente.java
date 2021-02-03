@@ -59,7 +59,7 @@ public class Cliente implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    private String region;
+    private Region region;
 
     // @PrePersist
     public void prePersist() {
