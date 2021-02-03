@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.adjmogollon.backend.apirest.models.dao.IClienteDao;
 import com.adjmogollon.backend.apirest.models.entity.Cliente;
+import com.adjmogollon.backend.apirest.models.entity.Region;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,6 +47,12 @@ public class ClienteServiceImpl implements IClienteService {
     public void delete(Long id) {
         clienteDao.deleteById(id);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Region> findAllRegiones() {
+        return clienteDao.findAllRegiones();
     }
 
 }

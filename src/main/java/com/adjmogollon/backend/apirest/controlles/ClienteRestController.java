@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.adjmogollon.backend.apirest.models.entity.Cliente;
+import com.adjmogollon.backend.apirest.models.entity.Region;
 import com.adjmogollon.backend.apirest.models.service.IClienteService;
 import com.adjmogollon.backend.apirest.models.service.IUploadFileService;
 
@@ -139,6 +140,8 @@ public class ClienteRestController {
             currentCliente.setApellido(cliente.getApellido());
             currentCliente.setEmail(cliente.getEmail());
             currentCliente.setCreateAt(cliente.getCreateAt());
+            currentCliente.setRegion(cliente.getRegion());
+
             clienteUpdated = this.clienteService.save(currentCliente);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al actualizar cliente en la base de datos");
@@ -215,6 +218,11 @@ public class ClienteRestController {
         HttpHeaders cabecera = new HttpHeaders();
         cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
         return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+    }
+
+    @GetMapping("/clientes/regiones")
+    public List<Region> listarRegiones() {
+        return clienteService.findAllRegiones();
     }
 
 }
