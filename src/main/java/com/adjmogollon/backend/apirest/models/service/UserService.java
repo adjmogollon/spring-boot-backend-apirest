@@ -40,7 +40,7 @@ public class UserService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = user.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
-                .peek(authority -> logger.info("Authority: " + authority.getAuthority())).collect(Collectors.toList());
+                .peek(authority -> logger.info("Authority AQUIII: " + authority.getAuthority())).collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.getEnabled(), true, true, true, authorities);

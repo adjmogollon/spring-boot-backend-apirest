@@ -39,3 +39,18 @@ INSERT INTO clientes (region_id,nombre, apellido, email, create_at) VALUES(8,'Ri
 INSERT INTO clientes (region_id,nombre, apellido, email, create_at) VALUES(8,'Ralph', 'Johnson', 'ralph.johnson@gmail.com', '2020-12-25');
 INSERT INTO clientes (region_id,nombre, apellido, email, create_at) VALUES(8,'John', 'Vlissides', 'john.vlissides@gmail.com', '2020-12-25');
 INSERT INTO clientes (region_id,nombre, apellido, email, create_at) VALUES(8,'James', 'Gosling', 'james.gosling@gmail.com', '2020-12-25');
+
+/* User and authority Creation */
+INSERT INTO users (username, password, enabled, firstname, lastname, email,create_at) VALUES ('user.user','$2a$10$9gC2YCOnk3Ud18rx7imAUu8Re7BQBWXfXYmsiaDM1LRZRVqFM/nUW',1, 'user', 'user','user.user@system.com','2021-02-06');
+INSERT INTO users (username, password, enabled, firstname, lastname, email,create_at) VALUES ('admin.admin','$2a$10$FyIGA2BNdDPjwLNykMFlxOuav6VdWMA46kh1avonp2OXWIM5pjbqi',1, 'admin', 'admin','admin.admin@system.com','2021-02-06');
+INSERT INTO users (username, password, enabled, firstname, lastname, email,create_at) VALUES ('anibal.mogollon','$2a$10$kPpPKrbNmMafQXHRlaeHNewXdHMMvn3mM69qdlTXwBTYFURSuCEVy',1, 'Anibal', 'Mogollon','anibal.mogollon@gmail.com','2021-02-06');
+
+
+INSERT INTO authorities (authority,create_at) VALUES ('ROLE_USER','2021-02-06');
+INSERT INTO authorities (authority,create_at) VALUES ('ROLE_ADMIN','2021-02-06');
+
+INSERT INTO users_authorities (user_id, authority_id) VALUES (1, 1);
+INSERT INTO users_authorities (user_id, authority_id) VALUES (2, 1);
+INSERT INTO users_authorities (user_id, authority_id) VALUES (2, 2);
+INSERT INTO users_authorities (user_id, authority_id) VALUES (3, 1);
+INSERT INTO users_authorities (user_id, authority_id) VALUES (3, 2);
