@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService implements IUserService, UserDetailsService {
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
@@ -40,11 +40,16 @@ public class UserService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = user.getAuthorities().stream()
                 .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
-                .peek(authority -> logger.info("Authority AQUIII: " + authority.getAuthority())).collect(Collectors.toList());
+                .peek(authority -> logger.info("Authority: " + authority.getAuthority())).collect(Collectors.toList());
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.getEnabled(), true, true, true, authorities);
 
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
     }
 
 }
