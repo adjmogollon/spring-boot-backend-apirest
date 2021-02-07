@@ -1,0 +1,19 @@
+GENERAR LLAVE RSA 
+
+Instalar version comunity de openssl de:
+	https://wiki.openssl.org/index.php/Binaries
+
+Poner el openssl/bin en el path del sistema operativo
+
+En la consola ejecutar:
+
+1.- Generar llave RSA
+	$: openssl genrsa -out jwt.pem
+
+2.- Ver Llave Privada
+	$: openssl rsa -in jwt.pem
+
+3.- Ver Llave Publica
+	$: openssl rsa -in jwt.pem -pubout
+	
+** Copiar las llaves y utilizar en la firma del token.
