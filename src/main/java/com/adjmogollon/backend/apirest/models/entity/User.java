@@ -46,7 +46,7 @@ public class User implements Serializable {
     @Column(length = 60)
     private String lastname;
 
-    @Column(length = 60)
+    @Column(unique = true)
     private String email;
 
     @Column(name = "create_at")
