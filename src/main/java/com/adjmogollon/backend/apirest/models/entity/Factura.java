@@ -32,7 +32,7 @@ public class Factura implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private Long Id;
 
     private String descripcion;
     private String observacion;
@@ -58,6 +58,13 @@ public class Factura implements Serializable {
         this.createAt = new Date();
     }
 
+    public Double getTotal(){
+        Double total = 0.00;
+        for (ItemFactura itemFactura : items) {
+            total += itemFactura.getImporte();
+        }   
+        return total;
+    }
     /**
      *
      */

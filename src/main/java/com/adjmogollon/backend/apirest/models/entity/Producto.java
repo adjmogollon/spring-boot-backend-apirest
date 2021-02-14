@@ -1,15 +1,17 @@
 package com.adjmogollon.backend.apirest.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.ToString;
@@ -17,24 +19,27 @@ import lombok.ToString;
 @Data
 @ToString
 @Entity
-@Table(name = "facturas_items")
-public class ItemFactura implements Serializable {
-
+@Table(name = "productos")
+public class Producto implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer cantidad;
+    private String nombre;
+    
+    private Double precio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id")
-    private Producto producto;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "create_at")
+    private Date createAt;
 
-    public Double getImporte() {
-        return cantidad.doubleValue() * producto.getPrecio();
-
+    @PrePersist
+    public void prePersist(){
+        createAt = new Date();
     }
 
     private static final long serialVersionUID = 1L;
+    
+
 
 }
