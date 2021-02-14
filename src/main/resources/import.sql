@@ -54,3 +54,25 @@ INSERT INTO users_authorities (user_id, authority_id) VALUES (2, 1);
 INSERT INTO users_authorities (user_id, authority_id) VALUES (2, 2);
 INSERT INTO users_authorities (user_id, authority_id) VALUES (3, 1);
 INSERT INTO users_authorities (user_id, authority_id) VALUES (3, 2);
+
+
+/* Populate tabla productos */
+INSERT INTO productos (nombre, precio, create_at) VALUES('Laptop DELL 6420', 250, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Laptop Acer 5442', 250, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Alcatel 1X', 60, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('TV LG 49 Inch B550', 350, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Tablet IPAD 2', 50, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Sony PlayStation 3 SuperSlim', 150, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Video Beam Sony S10', 150, NOW());
+INSERT INTO productos (nombre, precio, create_at) VALUES('Smart TV Aiwa 32', 150, NOW());
+
+/* Creamos algunas facturas */
+INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura numero uno', null, 1, NOW());
+
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 1);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 1, 4);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 5);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 7);
+
+INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura numero dos', 'Alguna nota importante!', 1, NOW());
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
