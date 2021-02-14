@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +19,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.ToString;
@@ -41,10 +42,12 @@ public class Factura implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    @JsonIgnoreProperties({ "facturas", "hibernateLazyInitializer", "handler" })
     @ManyToOne(fetch = FetchType.LAZY)
     // @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "factura_id")
     private List<ItemFactura> items;
@@ -58,13 +61,14 @@ public class Factura implements Serializable {
         this.createAt = new Date();
     }
 
-    public Double getTotal(){
+    public Double getTotal() {
         Double total = 0.00;
         for (ItemFactura itemFactura : items) {
             total += itemFactura.getImporte();
-        }   
+        }
         return total;
     }
+
     /**
      *
      */
