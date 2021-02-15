@@ -3,7 +3,9 @@ package com.adjmogollon.backend.apirest.models.service;
 import java.util.List;
 
 import com.adjmogollon.backend.apirest.models.dao.IClienteDao;
+import com.adjmogollon.backend.apirest.models.dao.IFacturaDao;
 import com.adjmogollon.backend.apirest.models.entity.Cliente;
+import com.adjmogollon.backend.apirest.models.entity.Factura;
 import com.adjmogollon.backend.apirest.models.entity.Region;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
     private IClienteDao clienteDao;
+
+    private IFacturaDao facturaDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -53,6 +57,25 @@ public class ClienteServiceImpl implements IClienteService {
     @Transactional(readOnly = true)
     public List<Region> findAllRegiones() {
         return clienteDao.findAllRegiones();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Factura findFacturaById(Long id) {
+        return facturaDao.findById(id).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public Factura saveFactura(Factura factura) {
+        return facturaDao.save(factura);
+    }
+
+    @Override
+    @Transactional
+    public void deleteFacturaByid(Long id) {
+        facturaDao.deleteById(id);
+
     }
 
 }
