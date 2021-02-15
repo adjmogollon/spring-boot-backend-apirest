@@ -30,7 +30,7 @@ public class FacturaRestController {
     @DeleteMapping("/facturas/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
-        clienteService.delete(id);
+        clienteService.deleteFacturaByid(id);
     }
 
 }
