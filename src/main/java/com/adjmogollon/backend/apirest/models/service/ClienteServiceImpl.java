@@ -20,6 +20,7 @@ public class ClienteServiceImpl implements IClienteService {
     @Autowired
     private IClienteDao clienteDao;
 
+    @Autowired
     private IFacturaDao facturaDao;
 
     @Override
