@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.adjmogollon.backend.apirest.models.entity.Cliente;
 import com.adjmogollon.backend.apirest.models.entity.Factura;
+import com.adjmogollon.backend.apirest.models.entity.Producto;
 import com.adjmogollon.backend.apirest.models.entity.Region;
 
 import org.springframework.data.domain.Page;
@@ -28,4 +29,5 @@ public interface IClienteService {
 
     public void deleteFacturaByid(Long id);
 
+    public List<Producto> findProductoByNombre(String term);
 }

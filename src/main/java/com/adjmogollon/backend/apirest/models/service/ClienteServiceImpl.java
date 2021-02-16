@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.adjmogollon.backend.apirest.models.dao.IClienteDao;
 import com.adjmogollon.backend.apirest.models.dao.IFacturaDao;
+import com.adjmogollon.backend.apirest.models.dao.IProductoDao;
 import com.adjmogollon.backend.apirest.models.entity.Cliente;
 import com.adjmogollon.backend.apirest.models.entity.Factura;
+import com.adjmogollon.backend.apirest.models.entity.Producto;
 import com.adjmogollon.backend.apirest.models.entity.Region;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
     private IFacturaDao facturaDao;
+
+    @Autowired
+    private IProductoDao productoDao;
 
     @Override
     @Transactional(readOnly = true)
@@ -77,6 +82,12 @@ public class ClienteServiceImpl implements IClienteService {
     public void deleteFacturaByid(Long id) {
         facturaDao.deleteById(id);
 
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Producto> findProductoByNombre(String term) {
+        return productoDao.findByNombreContainingIgnoreCase(term);
     }
 
 }

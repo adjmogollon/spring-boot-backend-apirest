@@ -1,6 +1,9 @@
 package com.adjmogollon.backend.apirest.controlles;
 
+import java.util.List;
+
 import com.adjmogollon.backend.apirest.models.entity.Factura;
+import com.adjmogollon.backend.apirest.models.entity.Producto;
 import com.adjmogollon.backend.apirest.models.service.IClienteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,12 @@ public class FacturaRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         clienteService.deleteFacturaByid(id);
+    }
+
+    @GetMapping("/facturas/filtrar-productos/{term}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<Producto> filtrarProductos(@PathVariable String term) {
+        return clienteService.findProductoByNombre(term);
     }
 
 }
