@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost" })
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost", "*" })
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {

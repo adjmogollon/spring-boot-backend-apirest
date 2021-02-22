@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### Imagenes Subidas###
-/uploads/**
+#/uploads/**
