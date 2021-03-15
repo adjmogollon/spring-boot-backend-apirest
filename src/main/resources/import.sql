@@ -1,7 +1,7 @@
 
-INSERT INTO regiones (id, nombre) VALUES (1, 'Sudamérica');
-INSERT INTO regiones (id, nombre) VALUES (2, 'Centroamérica');
-INSERT INTO regiones (id, nombre) VALUES (3, 'Norteamérica');
+INSERT INTO regiones (id, nombre) VALUES (1, 'Sudamerica');
+INSERT INTO regiones (id, nombre) VALUES (2, 'Centroamerica');
+INSERT INTO regiones (id, nombre) VALUES (3, 'Norteamerica');
 INSERT INTO regiones (id, nombre) VALUES (4, 'Europa');
 INSERT INTO regiones (id, nombre) VALUES (5, 'Asia');
 INSERT INTO regiones (id, nombre) VALUES (6, 'Africa');
@@ -68,7 +68,6 @@ INSERT INTO productos (nombre, precio, create_at) VALUES('Smart TV Aiwa 32', 150
 
 /* Creamos algunas facturas */
 INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura numero uno', null, 1, NOW());
-
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 1);
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 1, 4);
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 5);
@@ -76,3 +75,98 @@ INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 1, 7);
 
 INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura numero dos', 'Alguna nota importante!', 1, NOW());
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
+
+INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura numero 3', 'Factura Cliente 2', 2, NOW());
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 3, 4);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 3, 3);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 3, 2);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(4, 3, 1);
+
+
+INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura numero 4', 'Factura Cliente 2', 2, NOW());
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(4, 4, 7);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 4, 6);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 4, 5);
+
+
+INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura numero 5', 'Factura Cliente tres', 3, NOW());
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 5, 3);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(2, 5, 4);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(1, 5, 5);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(4, 5, 6);
+INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(5, 5, 7);
+
+
+DROP procedure IF EXISTS `contarClientePorRegion`;
+
+DELIMITER $$
+CREATE PROCEDURE `contarClientePorRegion`(
+IN idRegion integer,
+out cantidad integer)
+BEGIN
+select count(id) into cantidad from clientes as c 
+where region_id = idRegion;
+END$$
+
+DELIMITER ;
+
+DROP procedure IF EXISTS `getCantidadFacturasTodosClientes`;
+
+DELIMITER $$
+CREATE PROCEDURE `getCantidadFacturasTodosClientes`()
+BEGIN
+select c.nombre nombreCliente, c.apellido apellidoCliente,c.email emailCliente, count(c.id) cantidadFacturas 
+from clientes as c 
+inner join facturas as f on (c.id = f.cliente_id)
+group by  c.nombre, c.apellido,c.email;
+END$$
+
+DELIMITER ;
+
+DROP procedure IF EXISTS `getFacturasClientePorEmail`;
+
+DELIMITER $$
+CREATE PROCEDURE `getFacturasClientePorEmail`(IN correoCliente VARCHAR(255))
+BEGIN
+select 
+f.id idFactura, f.cliente_id idCliente, f.descripcion descripcionFactura,
+f.observacion observacionFactura,c.email emailCliente, c.nombre nombreCliente, c.apellido apellidoCliente
+from facturas as f 
+inner join clientes as c  on (f.cliente_id = c.id)
+where c.email = correoCliente;
+END$$
+
+DELIMITER ;
+
+DROP procedure IF EXISTS `getInfoClientePorCorreo`;
+
+DELIMITER $$
+CREATE PROCEDURE `getInfoClientePorCorreo`(IN correoCliente VARCHAR(255))
+BEGIN
+select c.id numberClient, c.nombre firtsNameClient, c.apellido lastNameClient, c.email emailCliente, r.id numberRegion, r.nombre nameRegion 
+from clientes as c
+inner join regiones as r on (c.region_id = r.id) 
+where c.email = correoCliente;
+END$$
+
+DELIMITER ;
+
+
+DROP procedure IF EXISTS `getInfoClientesTodos`;
+
+DELIMITER $$
+USE `db_springboot_backend`$$
+CREATE PROCEDURE `getInfoClientesTodos`()
+BEGIN
+select c.id numberClient, c.nombre firtsNameClient, c.apellido lastNameClient, c.email emailCliente, r.id numberRegion, r.nombre nameRegion 
+from clientes as c
+inner join regiones as r on (c.region_id = r.id);
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
